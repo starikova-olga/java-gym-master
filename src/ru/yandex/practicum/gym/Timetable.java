@@ -25,14 +25,14 @@ public class Timetable {
       dayTimetable.get(timeOfDay).add(trainingSession);
     }
 
-    public List<TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
-      TreeMap<TimeOfDay, List<TrainingSession>> dayTimetable = timetable.getOrDefault(dayOfWeek, new TreeMap<>());
-       List<TrainingSession> sessions = new ArrayList<>();
-       for (List<TrainingSession> session : dayTimetable.values()) {
-           sessions.addAll(session); //как реализовать, тоже непонятно, но сложность должна быть О(1)
-       }
-       return sessions;
+    public TreeMap<TimeOfDay, List<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
+        TreeMap<TimeOfDay, List<TrainingSession>> trainingForDay = timetable.getOrDefault(dayOfWeek, new TreeMap<>());
+        if (trainingForDay == null) {
+            return new TreeMap<>(); //как реализовать, тоже непонятно, но сложность должна быть О(1)
+        }
+        return trainingForDay;
     }
+
 
     public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
        TreeMap<TimeOfDay, List<TrainingSession>> dayTimetable = timetable.getOrDefault(dayOfWeek, new TreeMap<>());
